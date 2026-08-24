@@ -18,5 +18,8 @@ Route::post('/masuk-room', [TestController::class, 'masukRoom']);
 
 Route::post('/kerjakan-test', [TestController::class, 'kerjakanTest']);
 
-// Ambil riwayat / hasil test
+// Ambil satu riwayat / hasil test
 Route::get('/riwayat-test/{id}', [TestController::class, 'riwayatTest']);
+
+// Ambil semua riwayat test berdasarkan user
+Route::get('/user/{id_user}/riwayat-test', [TestController::class, 'daftarRiwayat']);

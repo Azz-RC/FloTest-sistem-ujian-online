@@ -145,13 +145,11 @@ class TestController extends Controller
             ], 404);
         }
 
-        // Cari room yang masih draft
         $riwayat = RiwayatTes::where('id_user', $request->id_user)
             ->where('id_test', $test->id_test)
             ->where('status_pengerjaan', 'draft')
             ->first();
 
-        // Kalau belum ada, buat room baru
         if (!$riwayat) {
             $riwayat = RiwayatTes::create([
                 'id_user' => $request->id_user,
@@ -198,8 +196,6 @@ class TestController extends Controller
         DB::beginTransaction();
 
         try {
-
-            // Ambil room yang masih draft
             $riwayat = RiwayatTes::where(
                 'id_riwayat_tes',
                 $request->id_riwayat_tes
@@ -217,7 +213,6 @@ class TestController extends Controller
                 ], 404);
             }
 
-            // Ambil test beserta soal
             $test = Test::with('soal')->find($request->id_test);
 
             if (!$test) {
@@ -231,9 +226,54 @@ class TestController extends Controller
             $benar = 0;
             $total = count($request->jawaban);
 
-            // Simpan jawaban dan cek kunci
-            foreach ($request->jawaban as $jawaban) {
+            $benar = 0;
+$total = count($request->jawaban);
 
+// VALIDASI JUMLAH SOAL
+$jumlahSoalTest = $test->soal->count();
+
+if ($total !== $jumlahSoalTest) {
+    DB::rollBack();
+
+    return response()->json([
+        'message' => 'Jumlah jawaban tidak sesuai dengan jumlah soal test',
+        'jumlah_soal' => $jumlahSoalTest,
+        'jumlah_jawaban' => $total,
+    ], 422);
+}
+
+// VALIDASI DUPLIKAT SOAL
+$idSoalJawaban = collect($request->jawaban)->pluck('id_soal');
+
+if ($idSoalJawaban->count() !== $idSoalJawaban->unique()->count()) {
+    DB::rollBack();
+
+    return response()->json([
+        'message' => 'Terdapat soal yang dijawab lebih dari satu kali'
+    ], 422);
+}
+
+// VALIDASI SOAL HARUS MILIK TEST
+$idSoalTest = $test->soal
+    ->pluck('id_soal')
+    ->sort()
+    ->values()
+    ->toArray();
+
+$idSoalJawabanArray = $idSoalJawaban
+    ->sort()
+    ->values()
+    ->toArray();
+
+if ($idSoalTest !== $idSoalJawabanArray) {
+    DB::rollBack();
+
+    return response()->json([
+        'message' => 'Jawaban tidak sesuai dengan soal pada test'
+    ], 422);
+}
+
+            foreach ($request->jawaban as $jawaban) {
                 $soal = $test->soal->firstWhere(
                     'id_soal',
                     $jawaban['id_soal']
@@ -265,7 +305,6 @@ class TestController extends Controller
                 ? ($benar / $total) * 100
                 : 0;
 
-            // Update room dari draft menjadi selesai
             $riwayat->update([
                 'skor_akhir' => $nilai,
                 'jumlah_benar' => $benar,
@@ -290,7 +329,6 @@ class TestController extends Controller
             ]);
 
         } catch (\Exception $e) {
-
             DB::rollBack();
 
             return response()->json([
@@ -334,6 +372,37 @@ class TestController extends Controller
                 'status_pengerjaan' => $riwayat->status_pengerjaan,
                 'jawaban' => $riwayat->detailRiwayat,
             ]
+        ]);
+    }
+
+
+    // =========================
+    // DAFTAR SEMUA RIWAYAT TEST USER
+    // =========================
+
+    public function daftarRiwayat($id_user)
+    {
+        $riwayat = RiwayatTes::with('test')
+            ->where('id_user', $id_user)
+            ->orderBy('tanggal_masuk', 'desc')
+            ->get();
+
+        return response()->json([
+            'message' => 'Daftar riwayat test ditemukan',
+            'data' => $riwayat->map(function ($item) {
+                return [
+                    'id_riwayat_tes' => $item->id_riwayat_tes,
+                    'id_user' => $item->id_user,
+                    'id_test' => $item->id_test,
+                    'judul_test' => $item->test->judul_test,
+                    'kode_test' => $item->test->kode_test,
+                    'tanggal_masuk' => $item->tanggal_masuk,
+                    'skor_akhir' => $item->skor_akhir,
+                    'jumlah_benar' => $item->jumlah_benar,
+                    'jumlah_salah' => $item->jumlah_salah,
+                    'status_pengerjaan' => $item->status_pengerjaan,
+                ];
+            })
         ]);
     }
 }
