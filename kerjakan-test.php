@@ -53,6 +53,15 @@ if (!isset($_SESSION["login"])) {
 
             </nav>
 
+             <button
+            type="button"
+            class="menu-toggle"
+            onclick="toggleMenu()"
+            aria-label="Buka menu"
+        >
+            ☰
+        </button>
+
         </header>
 
 

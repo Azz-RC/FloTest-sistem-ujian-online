@@ -255,17 +255,15 @@ body {
 ========================= */
 
 .home-navbar {
-    height: 70px;
-
+    min-height: 90px;
+    padding: 0 40px;
     display: flex;
     align-items: center;
     justify-content: space-between;
-
-    padding: 0 50px;
-
     background: white;
 
     border-bottom: 1px solid #e8e5f2;
+    
 }
 
 .home-navbar .logo {
@@ -360,7 +358,7 @@ body {
 
     background: #ffffff;
 
-    border: 1px solid #e3e1e9;
+    border: 1px solid #9c85e3;
     border-radius: 7px;
 
     margin: 15px 20px 0;
@@ -370,7 +368,7 @@ body {
 /* Logo */
 
 .home-navbar .logo {
-    font-size: 17px;
+    font-size: 22px;
     font-weight: 700;
 
     color: #161625;
@@ -411,7 +409,7 @@ body {
 
     text-decoration: none;
 
-    font-size: 10px;
+    font-size: 20px;
     font-weight: 500;
 }
 
