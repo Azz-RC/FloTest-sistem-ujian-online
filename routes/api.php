@@ -17,3 +17,6 @@ Route::get('/test/{id}', [TestController::class, 'show']);
 Route::post('/masuk-room', [TestController::class, 'masukRoom']);
 
 Route::post('/kerjakan-test', [TestController::class, 'kerjakanTest']);
+
+// Ambil riwayat / hasil test
+Route::get('/riwayat-test/{id}', [TestController::class, 'riwayatTest']);

@@ -299,4 +299,41 @@ class TestController extends Controller
             ], 500);
         }
     }
+
+
+    // =========================
+    // AMBIL RIWAYAT / HASIL TEST
+    // =========================
+
+    public function riwayatTest($id)
+    {
+        $riwayat = RiwayatTes::with([
+            'user',
+            'test',
+            'detailRiwayat.soal'
+        ])->find($id);
+
+        if (!$riwayat) {
+            return response()->json([
+                'message' => 'Riwayat test tidak ditemukan'
+            ], 404);
+        }
+
+        return response()->json([
+            'message' => 'Riwayat test ditemukan',
+            'data' => [
+                'id_riwayat_tes' => $riwayat->id_riwayat_tes,
+                'id_user' => $riwayat->id_user,
+                'id_test' => $riwayat->id_test,
+                'judul_test' => $riwayat->test->judul_test,
+                'kode_test' => $riwayat->test->kode_test,
+                'tanggal_masuk' => $riwayat->tanggal_masuk,
+                'skor_akhir' => $riwayat->skor_akhir,
+                'jumlah_benar' => $riwayat->jumlah_benar,
+                'jumlah_salah' => $riwayat->jumlah_salah,
+                'status_pengerjaan' => $riwayat->status_pengerjaan,
+                'jawaban' => $riwayat->detailRiwayat,
+            ]
+        ]);
+    }
 }
