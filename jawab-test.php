@@ -1,37 +1,123 @@
+<?php
+session_start();
+
+if (!isset($_SESSION["login"])) {
+    header("Location: index.php");
+    exit;
+}
+?>
+
 <!DOCTYPE html>
 <html lang="id">
+
 <head>
     <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
     <title>Jawab Test - FloTest</title>
-    <link rel="stylesheet" href="css/style.css">
+
+    <link rel="stylesheet" href="assets/css/style.css">
 </head>
+
 <body>
-    <nav class="navbar">
-        <div class="logo">FloTest</div>
-        <ul class="nav-links">
-            <li><a href="home.php">Home</a></li>
-            <li><a href="buat-test.php">Buat Test</a></li>
-            <li><a href="jawab-test.php" class="active">Jawab Test</a></li>
-            <li><a href="index.php">Logout</a></li>
-        </ul>
-    </nav>
 
-    <div class="container">
-        <h2>Jawab Test</h2>
-        
-        <form action="#" method="POST" style="display: flex; gap: 10px; align-items: flex-end; margin-top: 20px; margin-bottom: 30px;">
-            <div class="form-group" style="flex: 1; margin-bottom: 0;">
-                <label>Input Kode Test</label>
-                <input type="text" name="kode_test" placeholder="Masukkan kode test" required>
+    <div class="home-page">
+
+        <!-- =========================
+             NAVBAR
+        ========================== -->
+
+        <header class="home-navbar">
+
+            <div class="logo">
+                <span>Flo</span>Test
             </div>
-            <button type="submit" class="btn-primary" style="width: auto; margin-top: 0; padding: 10px 20px;">Masuk</button>
-        </form>
-        <p style="font-size: 12px; color: #888; margin-bottom: 30px;">* Masukkan kode test yang diberikan oleh pembuat test untuk masuk ke room.</p>
 
-        <h3>Riwayat Room</h3>
-        <div style="background: #f8f9fa; padding: 20px; border-radius: 6px; margin-top: 10px; color: #777;">
-            Belum ada room yang diikuti.
-        </div>
+            <nav class="navbar-menu">
+
+                <a href="home.php" class="nav-link">
+                    Home
+                </a>
+
+                <a href="buat-test.php" class="nav-link">
+                    Buat Test
+                </a>
+
+                <a href="jawab-test.php" class="nav-link active">
+                    Jawab Test
+                </a>
+
+                <a href="index.php" class="nav-link">
+                    Logout
+                </a>
+
+            </nav>
+
+             <button
+            type="button"
+            class="menu-toggle"
+            onclick="toggleMenu()"
+            aria-label="Buka menu"
+        >
+            ☰
+        </button>
+
+        </header>
+
+
+        <!-- =========================
+             JAWAB TEST
+        ========================== -->
+
+        <main class="jawab-test-content">
+
+            <div class="jawab-test-card">
+
+                <h1>Jawab Test</h1>
+
+                <p class="jawab-description">
+                    Masukkan kode test yang diberikan oleh pembuat test.
+                </p>
+
+
+                <form action="kerjakan-test.php" method="POST">
+
+                <div class="form-group">
+
+                    <label for="kode-test">
+                        Kode Test
+                    </label>
+
+                    <input
+                        type="text"
+                        id="kode-test"
+                        name="kode_test"
+                        placeholder="Masukkan kode test"
+                        maxlength="6"
+                        required
+                    >
+
+                </div>
+
+
+                <button
+                    type="submit"
+                    class="btn-next"
+                >
+                    Mulai Test
+                </button>
+
+</form>
+
+            </div>
+
+        </main>
+
     </div>
+
+
+    <script src="assets/js/script.js"></script>
+
 </body>
+
 </html>

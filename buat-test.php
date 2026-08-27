@@ -1,33 +1,109 @@
+<?php
+session_start();
+
+if (!isset($_SESSION["login"])) {
+    header("Location: index.php");
+    exit;
+}
+?>
+
 <!DOCTYPE html>
 <html lang="id">
+
 <head>
     <meta charset="UTF-8">
-    <title>Buat Test - FloTest</title>
-    <link rel="stylesheet" href="css/style.css">
-</head>
-<body>
-    <nav class="navbar">
-        <div class="logo">FloTest</div>
-        <ul class="nav-links">
-            <li><a href="home.php">Home</a></li>
-            <li><a href="buat-test.php" class="active">Buat Test</a></li>
-            <li><a href="jawab-test.php">Jawab Test</a></li>
-            <li><a href="index.php">Logout</a></li>
-        </ul>
-    </nav>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-    <div class="container">
-        <h2>Buat Test</h2>
-        <p style="color: #666; margin-top: 5px; margin-bottom: 25px;">Atur judul test baru Anda.</p>
-        
-        <form action="#" method="POST">
-            <div class="form-group">
-                <label>Judul Test</label>
-                <input type="text" name="judul_test" placeholder="Masukkan judul test" required>
+    <title>Buat Test - FloTest</title>
+
+    <link rel="stylesheet" href="assets/css/style.css">
+</head>
+
+<body>
+
+    <div class="home-page">
+
+        <header class="home-navbar">
+
+            <div class="logo">
+                <span>Flo</span>Test
             </div>
-            
-            <button type="submit" class="btn-primary" style="width: auto; padding: 10px 25px;">Selanjutnya</button>
-        </form>
+
+            <nav class="navbar-menu">
+
+                <a href="home.php" class="nav-link">
+                    Home
+                </a>
+
+                <a href="buat-test.php" class="nav-link active">
+                    Buat Test
+                </a>
+
+                <a href="jawab-test.php" class="nav-link">
+                    Jawab Test
+                </a>
+
+                <a href="index.php" class="nav-link">
+                    Logout
+                </a>
+
+            </nav>
+
+            <button
+                type="button"
+                class="menu-toggle"
+                onclick="toggleMenu()"
+                aria-label="Buka menu"
+            >
+                ☰
+            </button>
+
+        </header>
+
+
+        <main class="buat-test-content">
+
+            <div class="buat-test-card">
+
+                <h1>Buat Test</h1>
+
+                <form action="buat-soal.php" method="POST">
+
+                    <div class="form-group">
+
+                        <label for="judul-test">
+                            Judul Test
+                        </label>
+
+                        <input
+                            type="text"
+                            id="judul-test"
+                            name="judul_test"
+                            placeholder="Masukkan judul test"
+                            required
+                        >
+
+                    </div>
+
+
+                    <button
+                        type="submit"
+                        class="btn-next"
+                    >
+                        Selanjutnya
+                    </button>
+
+                </form>
+
+            </div>
+
+        </main>
+
     </div>
+
+
+    <script src="assets/js/script.js"></script>
+
 </body>
+
 </html>

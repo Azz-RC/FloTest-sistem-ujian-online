@@ -5,6 +5,11 @@ if (!isset($_SESSION["login"])) {
     header("Location: index.php");
     exit;
 }
+
+if (!isset($_SESSION["kode_test"])) {
+    header("Location: buat-test.php");
+    exit;
+}
 ?>
 
 <!DOCTYPE html>
@@ -22,10 +27,6 @@ if (!isset($_SESSION["login"])) {
 <body>
 
     <div class="home-page">
-
-        <!-- =========================
-             NAVBAR
-        ========================== -->
 
         <header class="home-navbar">
 
@@ -53,12 +54,16 @@ if (!isset($_SESSION["login"])) {
 
             </nav>
 
+            <button
+                type="button"
+                class="menu-toggle"
+                onclick="toggleMenu()"
+                aria-label="Buka menu"
+            >
+                ☰
+            </button>
+
         </header>
-
-
-        <!-- =========================
-             TEST SELESAI
-        ========================== -->
 
         <main class="test-selesai-content">
 
@@ -75,7 +80,7 @@ if (!isset($_SESSION["login"])) {
                 </p>
 
                 <div class="kode-test">
-                    335
+                    <?php echo $_SESSION["kode_test"]; ?>
                 </div>
 
                 <p class="kode-info">
@@ -83,7 +88,6 @@ if (!isset($_SESSION["login"])) {
                     <br>
                     untuk mengakses test Anda.
                 </p>
-
 
                 <div class="test-selesai-buttons">
 

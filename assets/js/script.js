@@ -22,15 +22,18 @@ let nomorSoal = 1;
 
 function tambahSoal() {
 
-    nomorSoal++;
-
     const container = document.getElementById("soal-container");
+
+    const index = nomorSoal;
+
+    nomorSoal++;
 
     const soalBaru = document.createElement("div");
 
     soalBaru.classList.add("soal-card");
 
     soalBaru.innerHTML = `
+
         <div class="soal-title">
             Soal ${nomorSoal}
         </div>
@@ -41,7 +44,9 @@ function tambahSoal() {
 
                 <textarea
                     class="input-soal"
+                    name="soal[${index}][pertanyaan]"
                     placeholder="Tulis soal di sini..."
+                    required
                 ></textarea>
 
             </div>
@@ -51,56 +56,44 @@ function tambahSoal() {
 
                 <label class="pilihan-item">
 
-                    <input
-                        type="radio"
-                        name="soal-${nomorSoal}"
-                        value="A"
-                    >
-
                     <span>A.</span>
 
                     <input
                         type="text"
                         class="input-pilihan"
+                        name="soal[${index}][pilihan_a]"
                         placeholder="Pilihan A"
+                        required
                     >
 
                 </label>
 
 
                 <label class="pilihan-item">
-
-                    <input
-                        type="radio"
-                        name="soal-${nomorSoal}"
-                        value="B"
-                    >
 
                     <span>B.</span>
 
                     <input
                         type="text"
                         class="input-pilihan"
+                        name="soal[${index}][pilihan_b]"
                         placeholder="Pilihan B"
+                        required
                     >
 
                 </label>
 
 
                 <label class="pilihan-item">
-
-                    <input
-                        type="radio"
-                        name="soal-${nomorSoal}"
-                        value="C"
-                    >
 
                     <span>C.</span>
 
                     <input
                         type="text"
                         class="input-pilihan"
+                        name="soal[${index}][pilihan_c]"
                         placeholder="Pilihan C"
+                        required
                     >
 
                 </label>
@@ -108,18 +101,14 @@ function tambahSoal() {
 
                 <label class="pilihan-item">
 
-                    <input
-                        type="radio"
-                        name="soal-${nomorSoal}"
-                        value="D"
-                    >
-
                     <span>D.</span>
 
                     <input
                         type="text"
                         class="input-pilihan"
+                        name="soal[${index}][pilihan_d]"
                         placeholder="Pilihan D"
+                        required
                     >
 
                 </label>
@@ -133,26 +122,29 @@ function tambahSoal() {
                     Kunci Jawaban
                 </label>
 
-                <select>
+                <select
+                    name="soal[${index}][kunci_jawaban]"
+                    required
+                >
 
                     <option value="">
                         Pilih jawaban
                     </option>
 
                     <option value="A">
-                        A. Pilihan A
+                        A
                     </option>
 
                     <option value="B">
-                        B. Pilihan B
+                        B
                     </option>
 
                     <option value="C">
-                        C. Pilihan C
+                        C
                     </option>
 
                     <option value="D">
-                        D. Pilihan D
+                        D
                     </option>
 
                 </select>
@@ -167,7 +159,6 @@ function tambahSoal() {
     updateLangkah();
 }
 
-
 // =========================
 // UPDATE LANGKAH
 // =========================
@@ -176,7 +167,10 @@ function updateLangkah() {
 
     const langkah = document.getElementById("jumlah-langkah");
 
-    langkah.textContent = `Langkah ${nomorSoal} dari 3`;
+    if (langkah) {
+        langkah.textContent = `Jumlah Soal: ${nomorSoal}`;
+    }
+
 }
 
 
@@ -223,192 +217,6 @@ function masukTest() {
     window.location.href = "kerjakan-test.php";
 }
 
-// =========================
-// DATA SOAL SEMENTARA
-// =========================
-
-const daftarSoal = [
-
-    {
-        pertanyaan: "Apa planet terbesar di tata surya?",
-        A: "Bumi",
-        B: "Mars",
-        C: "Jupiter",
-        D: "Venus"
-    },
-
-    {
-        pertanyaan: "Apa ibu kota Indonesia?",
-        A: "Bandung",
-        B: "Jakarta",
-        C: "Surabaya",
-        D: "Medan"
-    },
-
-    {
-        pertanyaan: "Berapa hasil dari 10 + 5?",
-        A: "10",
-        B: "12",
-        C: "15",
-        D: "20"
-    },
-
-    {
-        pertanyaan: "Hewan yang dikenal sebagai raja hutan adalah?",
-        A: "Harimau",
-        B: "Gajah",
-        C: "Singa",
-        D: "Serigala"
-    },
-
-    {
-        pertanyaan: "Planet yang dikenal sebagai Planet Merah adalah?",
-        A: "Mars",
-        B: "Venus",
-        C: "Jupiter",
-        D: "Saturnus"
-    }
-
-];
-
-
-// =========================
-// POSISI SOAL
-// =========================
-
-let soalSekarang = 0;
-
-
-// Menyimpan jawaban peserta
-
-const jawabanPeserta = {};
-
-
-// =========================
-// TAMPILKAN SOAL
-// =========================
-
-function tampilkanSoal() {
-
-    const soal = daftarSoal[soalSekarang];
-
-    document.getElementById("pertanyaan").textContent =
-        `${soalSekarang + 1}. ${soal.pertanyaan}`;
-
-    document.getElementById("jawaban-A").textContent =
-        `A. ${soal.A}`;
-
-    document.getElementById("jawaban-B").textContent =
-        `B. ${soal.B}`;
-
-    document.getElementById("jawaban-C").textContent =
-        `C. ${soal.C}`;
-
-    document.getElementById("jawaban-D").textContent =
-        `D. ${soal.D}`;
-
-    document.getElementById("nomor-soal").textContent =
-        `Soal ${soalSekarang + 1} dari ${daftarSoal.length}`;
-
-
-    // Menampilkan jawaban yang sebelumnya dipilih
-
-    const jawabanSebelumnya =
-        jawabanPeserta[soalSekarang];
-
-    const pilihan =
-        document.querySelectorAll('input[name="jawaban"]');
-
-    pilihan.forEach(function(input) {
-
-        input.checked =
-            input.value === jawabanSebelumnya;
-
-    });
-}
-
-
-// =========================
-// SOAL BERIKUTNYA
-// =========================
-
-function soalBerikutnya() {
-
-    const jawaban =
-        document.querySelector('input[name="jawaban"]:checked');
-
-
-    if (!jawaban) {
-
-        alert("Silakan pilih jawaban terlebih dahulu.");
-
-        return;
-    }
-
-
-    // Simpan jawaban
-
-    jawabanPeserta[soalSekarang] =
-        jawaban.value;
-
-
-    if (soalSekarang < daftarSoal.length - 1) {
-
-        soalSekarang++;
-
-        tampilkanSoal();
-
-    } else {
-
-        // Soal terakhir
-
-        window.location.href = "hasil-test.php";
-
-    }
-}
-
-
-// =========================
-// SOAL SEBELUMNYA
-// =========================
-
-function soalSebelumnya() {
-
-    if (soalSekarang === 0) {
-
-        alert("Ini adalah soal pertama.");
-
-        return;
-    }
-
-
-    // Simpan jawaban jika ada
-
-    const jawaban =
-        document.querySelector('input[name="jawaban"]:checked');
-
-    if (jawaban) {
-
-        jawabanPeserta[soalSekarang] =
-            jawaban.value;
-    }
-
-
-    soalSekarang--;
-
-    tampilkanSoal();
-}
-
-
-// =========================
-// JALANKAN SAAT HALAMAN DIBUKA
-// =========================
-
-if (document.getElementById("pertanyaan")) {
-
-    tampilkanSoal();
-
-}
 
 // =========================
 // MOBILE MENU
