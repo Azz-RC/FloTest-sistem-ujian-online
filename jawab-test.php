@@ -307,6 +307,8 @@ if ($stmt_history) {
     mysqli_stmt_close($stmt_history);
 }
 
+$active_page = "jawab-test";
+
 ?>
 
 <!DOCTYPE html>
@@ -337,60 +339,7 @@ if ($stmt_history) {
 <div class="home-page">
 
 
-    <header class="home-navbar">
-
-        <div class="logo">
-            <span>Flo</span>Test
-        </div>
-
-
-        <div class="navbar-wrapper">
-
-            <nav class="navbar-menu">
-
-                <a
-                    href="home.php"
-                    class="nav-link"
-                >
-                    Home
-                </a>
-
-                <a
-                    href="buat-test.php"
-                    class="nav-link"
-                >
-                    Buat Test
-                </a>
-
-                <a
-                    href="jawab-test.php"
-                    class="nav-link active"
-                >
-                    Jawab Test
-                </a>
-
-                <a
-                    href="index.php?logout=1"
-                    class="nav-link"
-                >
-                    Logout
-                </a>
-
-            </nav>
-
-
-            <button
-                type="button"
-                class="menu-toggle"
-                onclick="toggleMenu()"
-                aria-label="Buka menu"
-            >
-                ☰
-            </button>
-
-        </div>
-
-    </header>
+    <?php include __DIR__ . "/components/navbar.php"; ?>
 
 
     <main class="jawab-test-content">
@@ -578,6 +527,8 @@ if ($stmt_history) {
         </div>
 
     </main>
+
+    <?php require_once __DIR__ . "/components/footer.php"; ?>
 
 </div>
 

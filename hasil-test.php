@@ -5,6 +5,9 @@ if (!isset($_SESSION["login"])) {
     header("Location: index.php");
     exit;
 }
+
+$active_page = "jawab-test";
+
 ?>
 
 <!DOCTYPE html>
@@ -23,38 +26,7 @@ if (!isset($_SESSION["login"])) {
 
     <div class="home-page">
 
-        <!-- =========================
-             NAVBAR
-        ========================== -->
-
-        <header class="home-navbar">
-
-            <div class="logo">
-                <span>Flo</span>Test
-            </div>
-
-            <nav class="navbar-menu">
-
-                <a href="home.php" class="nav-link">
-                    Home
-                </a>
-
-                <a href="buat-test.php" class="nav-link">
-                    Buat Test
-                </a>
-
-                <a href="jawab-test.php" class="nav-link active">
-                    Jawab Test
-                </a>
-
-                <a href="index.php" class="nav-link">
-                    Logout
-                </a>
-
-            </nav>
-
-        </header>
-
+        <?php include __DIR__ . "/components/navbar.php"; ?>
 
         <!-- =========================
              HASIL TEST
@@ -162,6 +134,8 @@ if (!isset($_SESSION["login"])) {
             </div>
 
         </main>
+
+        <?php require_once __DIR__ . "/components/footer.php"; ?>
 
     </div>
 

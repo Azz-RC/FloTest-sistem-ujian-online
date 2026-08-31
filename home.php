@@ -10,6 +10,8 @@ if (
     exit;
 }
 
+$active_page = "home";
+
 ?>
 
 <!DOCTYPE html>
@@ -40,65 +42,7 @@ if (
 <div class="home-page">
 
 
-    <!-- =====================================================
-         NAVBAR
-    ====================================================== -->
-
-    <header class="home-navbar">
-
-        <div class="logo">
-            <span>Flo</span>Test
-        </div>
-
-
-        <div class="navbar-wrapper">
-
-            <nav class="navbar-menu">
-
-                <a
-                    href="home.php"
-                    class="nav-link active"
-                >
-                    Home
-                </a>
-
-                <a
-                    href="buat-test.php"
-                    class="nav-link"
-                >
-                    Buat Test
-                </a>
-
-                <a
-                    href="jawab-test.php"
-                    class="nav-link"
-                >
-                    Jawab Test
-                </a>
-
-                <a
-                    href="index.php?logout=1"
-                    class="nav-link"
-                >
-                    Logout
-                </a>
-
-            </nav>
-
-
-            <button
-                type="button"
-                class="menu-toggle"
-                onclick="toggleMenu()"
-                aria-label="Buka menu"
-            >
-                ☰
-            </button>
-
-        </div>
-
-    </header>
-
+   <?php include __DIR__ . "/components/navbar.php"; ?>
 
     <!-- =====================================================
          MAIN CONTENT
@@ -162,6 +106,8 @@ if (
         </section>
 
     </main>
+
+    <?php require_once __DIR__ . "/components/footer.php"; ?>
 
 </div>
 

@@ -551,6 +551,8 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
     }
 }
 
+$active_page = "jawab-test";
+
 ?>
 
 <!DOCTYPE html>
@@ -581,64 +583,7 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
 <div class="home-page">
 
 
-    <!-- =====================================================
-         NAVBAR
-    ====================================================== -->
-
-    <header class="home-navbar">
-
-        <div class="logo">
-            <span>Flo</span>Test
-        </div>
-
-
-        <div class="navbar-wrapper">
-
-            <nav class="navbar-menu">
-
-                <a
-                    href="home.php"
-                    class="nav-link"
-                >
-                    Home
-                </a>
-
-                <a
-                    href="buat-test.php"
-                    class="nav-link"
-                >
-                    Buat Test
-                </a>
-
-                <a
-                    href="jawab-test.php"
-                    class="nav-link active"
-                >
-                    Jawab Test
-                </a>
-
-                <a
-                    href="index.php?logout=1"
-                    class="nav-link"
-                >
-                    Logout
-                </a>
-
-            </nav>
-
-
-            <button
-                type="button"
-                class="menu-toggle"
-                onclick="toggleMenu()"
-                aria-label="Buka menu"
-            >
-                ☰
-            </button>
-
-        </div>
-
-    </header>
+   <?php include __DIR__ . "/components/navbar.php"; ?>
 
 
     <?php if ($sudah_selesai): ?>
@@ -1012,6 +957,8 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
 
 
     <?php endif; ?>
+
+    <?php require_once __DIR__ . "/components/footer.php"; ?>
 
 </div>
 

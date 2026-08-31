@@ -342,6 +342,8 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
     }
 }
 
+$active_page = "buat-test";
+
 ?>
 
 <!DOCTYPE html>
@@ -372,60 +374,7 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
 <div class="home-page">
 
 
-    <header class="home-navbar">
-
-        <div class="logo">
-            <span>Flo</span>Test
-        </div>
-
-
-        <div class="navbar-wrapper">
-
-            <nav class="navbar-menu">
-
-                <a
-                    href="home.php"
-                    class="nav-link"
-                >
-                    Home
-                </a>
-
-                <a
-                    href="buat-test.php"
-                    class="nav-link active"
-                >
-                    Buat Test
-                </a>
-
-                <a
-                    href="jawab-test.php"
-                    class="nav-link"
-                >
-                    Jawab Test
-                </a>
-
-                <a
-                    href="index.php?logout=1"
-                    class="nav-link"
-                >
-                    Logout
-                </a>
-
-            </nav>
-
-
-            <button
-                type="button"
-                class="menu-toggle"
-                onclick="toggleMenu()"
-                aria-label="Buka menu"
-            >
-                ☰
-            </button>
-
-        </div>
-
-    </header>
+    <?php include __DIR__ . "/components/navbar.php"; ?>
 
 
     <main class="buat-soal-content">
@@ -636,6 +585,8 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
         </form>
 
     </main>
+
+    <?php require_once __DIR__ . "/components/footer.php"; ?>
 
 </div>
 
