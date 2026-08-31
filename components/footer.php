@@ -2,10 +2,6 @@
 
     <div class="footer-content">
 
-        <div class="footer-logo">
-            <span>Flo</span>Test
-        </div>
-
         <p>
             Sistem Belajar Online
         </p>
