@@ -1133,3 +1133,407 @@ button:disabled {
   font-size: 13px !important;
   color: #9ca3af !important;
 }
+
+/* =========================================================
+   PESAN BERHASIL
+========================================================= */
+
+.success-message {
+  padding: 12px 14px;
+  margin-bottom: 18px;
+  color: #18794e;
+  background: #edfff6;
+  border: 1px solid #9de2be;
+  border-radius: 8px;
+}
+
+
+/* =========================================================
+   TOMBOL CRUD
+========================================================= */
+
+.test-actions {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  flex-wrap: wrap;
+}
+
+.form-hapus-test {
+  margin: 0;
+}
+
+.btn-crud {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 38px;
+  padding: 8px 14px;
+  border: 0;
+  border-radius: 8px;
+  font-family: inherit;
+  font-size: 13px;
+  font-weight: 600;
+  text-decoration: none;
+  cursor: pointer;
+  transition:
+    transform 0.2s,
+    opacity 0.2s;
+}
+
+.btn-crud:hover {
+  transform: translateY(-1px);
+  opacity: 0.88;
+}
+
+.btn-lihat {
+  color: #ffffff;
+  background: #5c33f6;
+}
+
+.btn-edit {
+  color: #5c33f6;
+  background: #eeeaff;
+}
+
+.btn-hapus {
+  color: #c62828;
+  background: #ffebee;
+}
+
+
+/* =========================================================
+   HALAMAN LIHAT TEST
+========================================================= */
+
+.detail-test-content {
+  width: min(900px, 92%);
+  margin: 0 auto;
+  padding: 40px 0 70px;
+}
+
+.back-link {
+  display: inline-block;
+  margin-bottom: 18px;
+  color: #5c33f6;
+  font-weight: 600;
+  text-decoration: none;
+}
+
+.back-link:hover {
+  text-decoration: underline;
+}
+
+.detail-test-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 24px;
+  padding: 28px;
+  margin-bottom: 22px;
+  background: #ffffff;
+  border-radius: 14px;
+  box-shadow:
+    0 8px 25px rgba(0, 0, 0, 0.05);
+}
+
+.detail-test-header h1 {
+  margin-bottom: 7px;
+  font-size: 28px;
+}
+
+.detail-test-header p {
+  color: #777777;
+}
+
+.detail-code {
+  flex-shrink: 0;
+  padding: 14px 20px;
+  text-align: center;
+  background: #f5f2ff;
+  border-radius: 10px;
+}
+
+.detail-code span {
+  display: block;
+  margin-bottom: 4px;
+  color: #777777;
+  font-size: 12px;
+}
+
+.detail-code strong {
+  color: #5c33f6;
+  font-size: 24px;
+  letter-spacing: 2px;
+}
+
+
+/* =========================================================
+   CARD DETAIL SOAL
+========================================================= */
+
+.detail-soal-card {
+  padding: 25px;
+  margin-bottom: 16px;
+  background: #ffffff;
+  border-radius: 14px;
+  box-shadow:
+    0 8px 25px rgba(0, 0, 0, 0.05);
+}
+
+.detail-soal-card h2 {
+  margin-bottom: 12px;
+  color: #5c33f6;
+  font-size: 17px;
+}
+
+.detail-pertanyaan {
+  margin-bottom: 18px;
+  font-size: 17px;
+  font-weight: 600;
+  line-height: 1.6;
+}
+
+.detail-pilihan {
+  display: grid;
+  grid-template-columns:
+    repeat(2, minmax(0, 1fr));
+  gap: 10px;
+}
+
+.detail-pilihan-item {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  min-height: 52px;
+  padding: 11px 13px;
+  border: 1px solid #e7e7eb;
+  border-radius: 9px;
+}
+
+.detail-pilihan-item > span {
+  display: grid;
+  flex: 0 0 30px;
+  height: 30px;
+  place-items: center;
+  color: #5c33f6;
+  background: #eeeaff;
+  border-radius: 50%;
+  font-weight: 700;
+}
+
+.detail-pilihan-item p {
+  flex: 1;
+  margin: 0;
+}
+
+.detail-pilihan-item strong {
+  color: #18794e;
+  font-size: 11px;
+}
+
+.detail-pilihan-item.jawaban-benar {
+  background: #edfff6;
+  border-color: #67c99a;
+}
+
+
+/* =========================================================
+   HALAMAN EDIT TEST
+========================================================= */
+
+.edit-test-content {
+  width: min(900px, 92%);
+  margin: 0 auto;
+  padding: 40px 0 70px;
+}
+
+.edit-test-heading {
+  margin-bottom: 22px;
+}
+
+.edit-test-heading h1 {
+  margin-bottom: 7px;
+  font-size: 28px;
+}
+
+.edit-test-heading p {
+  color: #777777;
+}
+
+.edit-test-heading strong {
+  color: #5c33f6;
+  letter-spacing: 1px;
+}
+
+.edit-actions {
+  display: flex;
+  justify-content: space-between;
+  gap: 12px;
+  margin-top: 22px;
+}
+
+.btn-remove-soal {
+  padding: 7px 11px;
+  color: #c62828;
+  background: #ffebee;
+  border: 0;
+  border-radius: 7px;
+  font-family: inherit;
+  font-size: 12px;
+  font-weight: 600;
+  cursor: pointer;
+}
+
+.btn-remove-soal:hover {
+  background: #ffd9de;
+}
+
+
+/* =========================================================
+   RESPONSIVE CRUD
+========================================================= */
+
+@media (max-width: 800px) {
+  .test-actions {
+    width: 100%;
+  }
+
+  .detail-test-header {
+    align-items: flex-start;
+    flex-direction: column;
+  }
+
+  .detail-pilihan {
+    grid-template-columns: 1fr;
+  }
+}
+
+@media (max-width: 600px) {
+  .detail-test-content,
+  .edit-test-content {
+    width: 92%;
+  }
+
+  .detail-test-header,
+  .detail-soal-card {
+    padding: 20px;
+  }
+
+  .detail-code {
+    width: 100%;
+  }
+
+  .test-actions {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+  }
+
+  .test-actions .form-hapus-test {
+    grid-column: 1 / -1;
+  }
+
+  .test-actions .btn-crud {
+    width: 100%;
+  }
+
+  .edit-actions {
+    flex-direction: column;
+  }
+
+  .edit-actions button {
+    width: 100%;
+  }
+}
+
+/* =========================================================
+   MERAPIKAN POSISI TEST SAYA
+========================================================= */
+
+.test-item {
+  display: grid;
+  grid-template-columns:
+    minmax(0, 1fr)
+    180px
+    220px;
+  align-items: center;
+  gap: 20px;
+  min-height: 104px;
+}
+
+.test-info {
+  min-width: 0;
+}
+
+.test-info h4 {
+  overflow-wrap: anywhere;
+}
+
+.test-code {
+  width: 180px;
+  text-align: center;
+}
+
+.test-code strong {
+  display: block;
+  overflow-wrap: anywhere;
+}
+
+.test-actions {
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  gap: 8px;
+  width: 220px;
+}
+
+
+/* =========================================================
+   RESPONSIVE TEST SAYA
+========================================================= */
+
+@media (max-width: 800px) {
+  .test-item {
+    grid-template-columns:
+      minmax(0, 1fr)
+      150px;
+  }
+
+  .test-code {
+    width: 150px;
+    text-align: right;
+  }
+
+  .test-actions {
+    grid-column: 1 / -1;
+    justify-content: flex-start;
+    width: 100%;
+  }
+}
+
+@media (max-width: 600px) {
+  .test-item {
+    grid-template-columns: 1fr;
+    gap: 14px;
+  }
+
+  .test-code {
+    width: 100%;
+    text-align: left;
+  }
+
+  .test-actions {
+    display: grid;
+    grid-column: auto;
+    grid-template-columns: 1fr 1fr;
+    width: 100%;
+  }
+
+  .test-actions .form-hapus-test {
+    grid-column: 1 / -1;
+  }
+
+  .test-actions .btn-crud {
+    width: 100%;
+  }
+}

@@ -607,3 +607,400 @@ document.addEventListener("DOMContentLoaded", function () {
 
   initKerjakanTest();
 });
+
+/* =========================================================
+   CRUD TEST
+========================================================= */
+
+
+/* =========================================================
+   KONFIRMASI HAPUS TEST
+========================================================= */
+
+document
+  .querySelectorAll(".form-hapus-test")
+  .forEach(function (form) {
+    form.addEventListener(
+      "submit",
+      function (event) {
+        const yakin = window.confirm(
+          "Yakin ingin menghapus test ini? " +
+            "Test tidak akan ditampilkan lagi."
+        );
+
+        if (!yakin) {
+          event.preventDefault();
+        }
+      }
+    );
+  });
+
+
+/* =========================================================
+   PERBARUI NOMOR SOAL DI HALAMAN EDIT
+========================================================= */
+
+function perbaruiNomorSoalEdit() {
+  const cards = document.querySelectorAll(
+    "#edit-soal-container .edit-soal-card"
+  );
+
+  cards.forEach(function (card, index) {
+    const judul = card.querySelector(
+      ".soal-title span"
+    );
+
+    if (judul) {
+      judul.textContent =
+        "Soal " + (index + 1);
+    }
+  });
+}
+
+
+/* =========================================================
+   TAMBAH SOAL DI HALAMAN EDIT
+========================================================= */
+
+const tombolTambahEdit = document.getElementById(
+  "btn-tambah-edit"
+);
+
+if (tombolTambahEdit) {
+  tombolTambahEdit.addEventListener(
+    "click",
+    function () {
+      const container =
+        document.getElementById(
+          "edit-soal-container"
+        );
+
+      if (!container) {
+        return;
+      }
+
+      const jumlahSoal =
+        container.querySelectorAll(
+          ".edit-soal-card"
+        ).length;
+
+      if (jumlahSoal >= 100) {
+        alert("Maksimal 100 soal.");
+
+        return;
+      }
+
+      const card =
+        document.createElement("div");
+
+      card.className =
+        "soal-card edit-soal-card";
+
+      card.setAttribute(
+        "data-id-soal",
+        "0"
+      );
+
+      card.innerHTML = `
+
+        <div class="soal-title">
+
+          <span>Soal</span>
+
+          <button
+            type="button"
+            class="btn-remove-soal"
+          >
+            Hapus Soal
+          </button>
+
+        </div>
+
+
+        <div class="soal-content">
+
+          <div class="pertanyaan-area">
+
+            <textarea
+              class="input-soal"
+              placeholder="Tulis soal di sini..."
+              maxlength="65535"
+              required
+            ></textarea>
+
+          </div>
+
+
+          <div class="pilihan-area">
+
+            <label class="pilihan-item">
+
+              <span>A</span>
+
+              <input
+                type="text"
+                class="input-pilihan pilihan-a"
+                placeholder="Pilihan A"
+                maxlength="255"
+                required
+              >
+
+            </label>
+
+
+            <label class="pilihan-item">
+
+              <span>B</span>
+
+              <input
+                type="text"
+                class="input-pilihan pilihan-b"
+                placeholder="Pilihan B"
+                maxlength="255"
+                required
+              >
+
+            </label>
+
+
+            <label class="pilihan-item">
+
+              <span>C</span>
+
+              <input
+                type="text"
+                class="input-pilihan pilihan-c"
+                placeholder="Pilihan C"
+                maxlength="255"
+                required
+              >
+
+            </label>
+
+
+            <label class="pilihan-item">
+
+              <span>D</span>
+
+              <input
+                type="text"
+                class="input-pilihan pilihan-d"
+                placeholder="Pilihan D"
+                maxlength="255"
+                required
+              >
+
+            </label>
+
+          </div>
+
+
+          <div class="kunci-area">
+
+            <label>
+              Kunci Jawaban
+            </label>
+
+            <select
+              class="kunci-jawaban"
+              required
+            >
+
+              <option value="">
+                Pilih jawaban
+              </option>
+
+              <option value="A">A</option>
+
+              <option value="B">B</option>
+
+              <option value="C">C</option>
+
+              <option value="D">D</option>
+
+            </select>
+
+          </div>
+
+        </div>
+
+      `;
+
+      container.appendChild(card);
+
+      perbaruiNomorSoalEdit();
+
+      card.scrollIntoView({
+        behavior: "smooth",
+        block: "start",
+      });
+    }
+  );
+}
+
+
+/* =========================================================
+   HAPUS CARD SOAL DI HALAMAN EDIT
+========================================================= */
+
+document.addEventListener(
+  "click",
+  function (event) {
+    if (
+      !event.target.classList.contains(
+        "btn-remove-soal"
+      )
+    ) {
+      return;
+    }
+
+    const container =
+      document.getElementById(
+        "edit-soal-container"
+      );
+
+    if (!container) {
+      return;
+    }
+
+    const jumlahSoal =
+      container.querySelectorAll(
+        ".edit-soal-card"
+      ).length;
+
+    if (jumlahSoal <= 1) {
+      alert(
+        "Minimal harus ada 1 soal."
+      );
+
+      return;
+    }
+
+    const card = event.target.closest(
+      ".edit-soal-card"
+    );
+
+    if (card) {
+      card.remove();
+
+      perbaruiNomorSoalEdit();
+    }
+  }
+);
+
+
+/* =========================================================
+   SIAPKAN DATA SOAL SEBELUM DISIMPAN
+========================================================= */
+
+const formEditTest = document.getElementById(
+  "form-edit-test"
+);
+
+if (formEditTest) {
+  formEditTest.addEventListener(
+    "submit",
+    function (event) {
+      const cards =
+        document.querySelectorAll(
+          "#edit-soal-container " +
+            ".edit-soal-card"
+        );
+
+      if (cards.length === 0) {
+        event.preventDefault();
+
+        alert(
+          "Minimal harus ada 1 soal."
+        );
+
+        return;
+      }
+
+      const semuaSoal = [];
+
+      cards.forEach(function (card) {
+        const idSoal =
+          card.getAttribute(
+            "data-id-soal"
+          ) || "0";
+
+        const pertanyaan =
+          card.querySelector(
+            ".input-soal"
+          );
+
+        const pilihanA =
+          card.querySelector(
+            ".pilihan-a"
+          );
+
+        const pilihanB =
+          card.querySelector(
+            ".pilihan-b"
+          );
+
+        const pilihanC =
+          card.querySelector(
+            ".pilihan-c"
+          );
+
+        const pilihanD =
+          card.querySelector(
+            ".pilihan-d"
+          );
+
+        const kunciJawaban =
+          card.querySelector(
+            ".kunci-jawaban"
+          );
+
+        semuaSoal.push({
+          id_soal: idSoal,
+
+          pertanyaan: pertanyaan
+            ? pertanyaan.value.trim()
+            : "",
+
+          pilihan_a: pilihanA
+            ? pilihanA.value.trim()
+            : "",
+
+          pilihan_b: pilihanB
+            ? pilihanB.value.trim()
+            : "",
+
+          pilihan_c: pilihanC
+            ? pilihanC.value.trim()
+            : "",
+
+          pilihan_d: pilihanD
+            ? pilihanD.value.trim()
+            : "",
+
+          kunci_jawaban: kunciJawaban
+            ? kunciJawaban.value
+            : "",
+        });
+      });
+
+      const inputSoalData =
+        document.getElementById(
+          "edit-soal-data"
+        );
+
+      if (!inputSoalData) {
+        event.preventDefault();
+
+        alert(
+          "Input data soal tidak ditemukan."
+        );
+
+        return;
+      }
+
+      inputSoalData.value =
+        JSON.stringify(semuaSoal);
+    }
+  );
+}
