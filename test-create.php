@@ -281,12 +281,23 @@ $active_page = "test";
                 </div>
 
 
-                <button
-                    type="submit"
-                    class="btn-next"
-                >
-                    Selanjutnya
-                </button>
+               <div class="test-create-actions">
+
+    <button
+        type="submit"
+        class="btn-next"
+    >
+        Selanjutnya
+    </button>
+
+    <a
+        href="test.php"
+        class="btn-back"
+    >
+        ← Kembali
+    </a>
+
+</div>
 
             </form>
 
