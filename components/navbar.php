@@ -24,10 +24,10 @@ $active_page = $active_page ?? "";
 
 
             <a
-                href="buat-test.php"
-                class="nav-link <?= $active_page === "buat-test" ? "active" : "" ?>"
+                href="test.php"
+                class="nav-link <?= $active_page === "test" ? "active" : "" ?>"
             >
-                Buat Test
+                Test
             </a>
 
 

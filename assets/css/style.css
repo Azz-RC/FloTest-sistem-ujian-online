@@ -362,13 +362,13 @@ button:disabled {
    BUAT TEST
 ========================================================= */
 
-.buat-test-content {
-  width: min(850px, 90%);
+.test-content {
+  width: min(1100px, 92%);
   margin: 0 auto;
   padding: 45px 0 70px;
 }
 
-.buat-test-card {
+.test-card {
   background: #fff;
   border-radius: 14px;
   padding: 28px;
@@ -376,7 +376,7 @@ button:disabled {
   box-shadow: 0 8px 25px rgba(0, 0, 0, 0.05);
 }
 
-.buat-test-card h1 {
+.test-card h1 {
   font-size: 24px;
   margin-bottom: 22px;
 }
@@ -1011,7 +1011,7 @@ button:disabled {
 
 @media (max-width: 600px) {
   .home-content,
-  .buat-test-content,
+  .test-content,
   .buat-soal-content,
   .jawab-test-content,
   .kerjakan-test-content,
@@ -1028,7 +1028,7 @@ button:disabled {
     margin-bottom: -20px;
   }
 
-  .buat-test-card,
+  .test-card,
   .jawab-test-card,
   .kerjakan-test-card,
   .test-selesai-card {
@@ -1147,7 +1147,6 @@ button:disabled {
   border-radius: 8px;
 }
 
-
 /* =========================================================
    TOMBOL CRUD
 ========================================================= */
@@ -1201,7 +1200,6 @@ button:disabled {
   background: #ffebee;
 }
 
-
 /* =========================================================
    HALAMAN LIHAT TEST
 ========================================================= */
@@ -1233,8 +1231,7 @@ button:disabled {
   margin-bottom: 22px;
   background: #ffffff;
   border-radius: 14px;
-  box-shadow:
-    0 8px 25px rgba(0, 0, 0, 0.05);
+  box-shadow: 0 8px 25px rgba(0, 0, 0, 0.05);
 }
 
 .detail-test-header h1 {
@@ -1267,7 +1264,6 @@ button:disabled {
   letter-spacing: 2px;
 }
 
-
 /* =========================================================
    CARD DETAIL SOAL
 ========================================================= */
@@ -1277,8 +1273,7 @@ button:disabled {
   margin-bottom: 16px;
   background: #ffffff;
   border-radius: 14px;
-  box-shadow:
-    0 8px 25px rgba(0, 0, 0, 0.05);
+  box-shadow: 0 8px 25px rgba(0, 0, 0, 0.05);
 }
 
 .detail-soal-card h2 {
@@ -1296,8 +1291,7 @@ button:disabled {
 
 .detail-pilihan {
   display: grid;
-  grid-template-columns:
-    repeat(2, minmax(0, 1fr));
+  grid-template-columns: repeat(2, minmax(0, 1fr));
   gap: 10px;
 }
 
@@ -1336,7 +1330,6 @@ button:disabled {
   background: #edfff6;
   border-color: #67c99a;
 }
-
 
 /* =========================================================
    HALAMAN EDIT TEST
@@ -1388,7 +1381,6 @@ button:disabled {
 .btn-remove-soal:hover {
   background: #ffd9de;
 }
-
 
 /* =========================================================
    RESPONSIVE CRUD
@@ -1487,7 +1479,6 @@ button:disabled {
   width: 220px;
 }
 
-
 /* =========================================================
    RESPONSIVE TEST SAYA
 ========================================================= */
@@ -1534,6 +1525,45 @@ button:disabled {
   }
 
   .test-actions .btn-crud {
+    width: 100%;
+  }
+}
+
+/* =========================================================
+   HEADER TEST SAYA
+========================================================= */
+
+.test-section-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 15px;
+  margin-bottom: 22px;
+}
+
+.test-section-header h1 {
+  margin-bottom: 0;
+}
+
+/* =========================================================
+   TOMBOL TAMBAH TEST
+========================================================= */
+
+.btn-tambah-test {
+  white-space: nowrap;
+}
+
+/* =========================================================
+   RESPONSIVE HEADER TEST SAYA
+========================================================= */
+
+@media (max-width: 600px) {
+  .test-section-header {
+    align-items: flex-start;
+    flex-direction: column;
+  }
+
+  .btn-tambah-test {
     width: 100%;
   }
 }

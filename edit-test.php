@@ -641,7 +641,7 @@ while (
 
 mysqli_stmt_close($stmt_daftar_soal);
 
-$active_page = "buat-test";
+$active_page = "test";
 
 ?>
 
@@ -678,7 +678,7 @@ $active_page = "buat-test";
     <main class="edit-test-content">
 
         <a
-            href="buat-test.php"
+            href="test.php"
             class="back-link"
         >
             &larr; Kembali ke Test Saya
@@ -738,7 +738,7 @@ $active_page = "buat-test";
 
             <!-- JUDUL TEST -->
 
-            <div class="buat-test-card">
+            <div class="test-card">
 
                 <div class="form-group">
 

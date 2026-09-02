@@ -140,7 +140,7 @@ while (
 
 mysqli_stmt_close($stmt_soal);
 
-$active_page = "buat-test";
+$active_page = "test";
 
 ?>
 
@@ -183,7 +183,7 @@ $active_page = "buat-test";
             <div class="detail-test-info">
 
                 <a
-                    href="buat-test.php"
+                    href="test.php"
                     class="back-link"
                 >
                     &larr; Kembali ke Test Saya

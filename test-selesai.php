@@ -295,7 +295,7 @@ if ($id_riwayat_tes > 0) {
                 </a>
 
                 <a
-                    href="buat-test.php"
+                    href="test.php"
                     class="nav-link <?= !$mode_peserta ? "active" : "" ?>"
                 >
                     Buat Test
@@ -378,10 +378,10 @@ if ($id_riwayat_tes > 0) {
                 <div class="test-selesai-buttons">
 
                     <a
-                        href="buat-test.php"
+                        href="test.php"
                         class="btn-secondary"
                     >
-                        Kembali ke Buat Test
+                        Kembali ke Test
                     </a>
 
 

@@ -342,7 +342,7 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
     }
 }
 
-$active_page = "buat-test";
+$active_page = "test";
 
 ?>
 

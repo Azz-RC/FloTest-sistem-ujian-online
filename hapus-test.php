@@ -33,7 +33,7 @@ if (!isset($_SESSION["id_user"])) {
 */
 
 if ($_SERVER["REQUEST_METHOD"] !== "POST") {
-    header("Location: buat-test.php");
+    header("Location: test.php");
     exit;
 }
 
@@ -291,7 +291,7 @@ try {
     mysqli_commit($conn);
 
     header(
-        "Location: buat-test.php?" .
+        "Location: test.php?" .
         "status=hapus-berhasil"
     );
 
