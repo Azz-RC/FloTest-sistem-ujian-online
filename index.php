@@ -5,6 +5,16 @@ session_start();
 require_once __DIR__ . "/koneksi.php";
 
 $error = "";
+$success = "";
+
+
+/* =========================================================
+   PESAN SETELAH REGISTRASI
+========================================================= */
+
+if (($_GET["register"] ?? "") === "berhasil") {
+    $success = "Akun berhasil dibuat. Silakan login.";
+}
 
 
 /* =========================================================
@@ -41,8 +51,10 @@ if (isset($_GET["logout"])) {
    JIKA SUDAH LOGIN
 ========================================================= */
 
-if (isset($_SESSION["login"]) && $_SESSION["login"] === true) {
-
+if (
+    isset($_SESSION["login"]) &&
+    $_SESSION["login"] === true
+) {
     header("Location: home.php");
     exit;
 }
@@ -54,12 +66,18 @@ if (isset($_SESSION["login"]) && $_SESSION["login"] === true) {
 
 if ($_SERVER["REQUEST_METHOD"] === "POST") {
 
-    $username = trim($_POST["username"] ?? "");
-    $password = $_POST["password"] ?? "";
+    $username = trim(
+        $_POST["username"] ?? ""
+    );
+
+    $password =
+        $_POST["password"] ?? "";
+
 
     if ($username === "" || $password === "") {
 
-        $error = "Username dan password wajib diisi.";
+        $error =
+            "Username dan password wajib diisi.";
 
     } else {
 
@@ -75,9 +93,11 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
              LIMIT 1"
         );
 
+
         if (!$stmt) {
 
-            $error = "Terjadi kesalahan pada database.";
+            $error =
+                "Terjadi kesalahan pada database.";
 
         } else {
 
@@ -89,9 +109,11 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
 
             mysqli_stmt_execute($stmt);
 
-            $result = mysqli_stmt_get_result($stmt);
+            $result =
+                mysqli_stmt_get_result($stmt);
 
-            $user = mysqli_fetch_assoc($result);
+            $user =
+                mysqli_fetch_assoc($result);
 
             mysqli_stmt_close($stmt);
 
@@ -103,31 +125,30 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
             if ($user) {
 
                 /*
-                 * Coba password_hash terlebih dahulu.
+                 * Periksa password yang sudah menggunakan hash.
                  */
-                if (password_verify(
-                    $password,
-                    $user["password"]
-                )) {
+                if (
+                    password_verify(
+                        $password,
+                        $user["password"]
+                    )
+                ) {
 
                     $password_valid = true;
 
-                } else {
-
+                } elseif (
                     /*
-                     * Kompatibilitas dengan database lama
-                     * yang masih menyimpan password plaintext.
+                     * Kompatibilitas untuk password lama
+                     * yang masih berupa teks biasa.
                      */
-                    if (
-                        hash_equals(
-                            (string) $user["password"],
-                            (string) $password
-                        )
-                    ) {
+                    hash_equals(
+                        (string) $user["password"],
+                        (string) $password
+                    )
+                ) {
 
-                        $password_valid = true;
-                        $password_is_plaintext = true;
-                    }
+                    $password_valid = true;
+                    $password_is_plaintext = true;
                 }
             }
 
@@ -135,8 +156,7 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
             if ($password_valid) {
 
                 /*
-                 * Jika password lama masih plaintext,
-                 * langsung migrasikan ke password_hash().
+                 * Ubah password lama menjadi password hash.
                  */
                 if ($password_is_plaintext) {
 
@@ -152,9 +172,11 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
                          WHERE id_user = ?"
                     );
 
+
                     if ($stmt_update) {
 
-                        $user_id = (int) $user["id_user"];
+                        $user_id =
+                            (int) $user["id_user"];
 
                         mysqli_stmt_bind_param(
                             $stmt_update,
@@ -163,9 +185,13 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
                             $user_id
                         );
 
-                        mysqli_stmt_execute($stmt_update);
+                        mysqli_stmt_execute(
+                            $stmt_update
+                        );
 
-                        mysqli_stmt_close($stmt_update);
+                        mysqli_stmt_close(
+                            $stmt_update
+                        );
                     }
                 }
 
@@ -173,8 +199,12 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
                 session_regenerate_id(true);
 
                 $_SESSION["login"] = true;
-                $_SESSION["id_user"] = (int) $user["id_user"];
-                $_SESSION["username"] = $user["username"];
+
+                $_SESSION["id_user"] =
+                    (int) $user["id_user"];
+
+                $_SESSION["username"] =
+                    $user["username"];
 
 
                 header("Location: home.php");
@@ -182,7 +212,8 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
 
             } else {
 
-                $error = "Username atau password salah.";
+                $error =
+                    "Username atau password salah.";
             }
         }
     }
@@ -202,9 +233,7 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
         content="width=device-width, initial-scale=1.0"
     >
 
-    <title>
-        Login - FloTest
-    </title>
+    <title>Login - FloTest</title>
 
     <link
         rel="stylesheet"
@@ -226,6 +255,21 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
         </p>
 
 
+        <!-- PESAN REGISTRASI BERHASIL -->
+
+        <?php if ($success !== ""): ?>
+
+            <div class="success-message">
+
+                <?= htmlspecialchars($success) ?>
+
+            </div>
+
+        <?php endif; ?>
+
+
+        <!-- PESAN LOGIN GAGAL -->
+
         <?php if ($error !== ""): ?>
 
             <div class="error-message">
@@ -236,6 +280,8 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
 
         <?php endif; ?>
 
+
+        <!-- FORM LOGIN -->
 
         <form
             action="index.php"
@@ -289,6 +335,19 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
             </button>
 
         </form>
+
+
+        <!-- LINK REGISTRASI -->
+
+        <p class="register-link">
+
+            Belum punya akun?
+
+            <a href="register.php">
+                Daftar
+            </a>
+
+        </p>
 
     </div>
 
